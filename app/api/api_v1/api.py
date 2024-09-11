@@ -1,5 +1,4 @@
 from fastapi import APIRouter
-
 from app.api.api_v1.endpoints import air_pollution, weather, weatherandpollution
 
 api_router = APIRouter()

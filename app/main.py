@@ -1,9 +1,13 @@
+import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from app.api.api_v1.api import api_router
 from app.core.config import settings
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+
 
 # Create the FastAPI app
 app = FastAPI(title=settings.PROJECT_NAME)
@@ -16,6 +20,12 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+app.mount("/static", StaticFiles(directory="app/static"), name="static")
+
+
+@app.get("/")
+async def serve_index():
+    return FileResponse("app/static/index.html")
 
 # Mount static files
 app.mount("/static", StaticFiles(directory="app/static/react-app"), name="static")
