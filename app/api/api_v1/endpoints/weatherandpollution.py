@@ -12,7 +12,7 @@ async def get_weather_and_pollution(lat: float, lon: float) -> Any:
     
     async with httpx.AsyncClient() as client:
        weather_data = await client.get(
-             settings.CURRENT_WEATHER_URL,
+             settings.CURRENT_WEATHER_LON_LAT_URL,
             params={"lat": lat, "lon": lon, "appid": settings.OPENWEATHERMAP_API_KEY, "units": "metric"}
             )
        

@@ -8,6 +8,7 @@ class Settings(BaseSettings):
     PROJECT_NAME: str = "Project WeatherApp"
     OPENWEATHERMAP_API_KEY: str
     CURRENT_WEATHER_URL: str
+    CURRENT_WEATHER_LON_LAT_URL: str
     AIR_POLLUTION_URL: str
     SERVER_NAME: str   
     SERVER_HOST: str   
