@@ -1,5 +1,5 @@
 import httpx
-from typing import Any
+from typing import Any, Optional
 from fastapi import APIRouter
 from app.core.config import settings
 
@@ -21,9 +21,6 @@ async def get_weather_and_pollution_current_location(lat: float, lon: float) -> 
         "airpollution": pollution_data.json()
     }
     return weather_and_pollution_data
-<<<<<<< HEAD
-=======
-
 
 @router.get("/weather_and_pollution_location")
 async def get_weather_and_pollution_current_location(lat: Optional[float], lon: Optional[float]) -> Any:
@@ -45,4 +42,4 @@ async def get_weather_and_pollution_current_location(lat: Optional[float], lon: 
     }
     
     return weather_and_pollution_data
->>>>>>> 92961ec (Updated code and added frontend)
+
