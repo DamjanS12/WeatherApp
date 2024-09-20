@@ -23,7 +23,6 @@ const Weather = () => {
         "03d": cloud_icon,
         "03n": cloud_icon,
         "04d": drizzle_icon,
-        "04n": drizzle_icon,
         "09d": rain_icon,
         "09n": rain_icon,
         "10d": rain_icon,
