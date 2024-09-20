@@ -42,7 +42,7 @@ const Weather = () => {
             const response = await fetch(url);
             const data = await response.json();
 
-            const iconKey = data.weather[0]?.icon; // Using optional chaining
+            const iconKey = data.weather[0]?.icon; 
             const icon = allicons[iconKey] || clear_icon;
 
             setWeatherData({
@@ -53,30 +53,32 @@ const Weather = () => {
                 icon: icon
             });
         } catch (error) {
-            console.error("Error fetching weather data:", error);
+            
         }
     };
 
     useEffect(() => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(async (position) => {
-                const { latitude, longitude } = position.coords;
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
                 try {
-                    const response = await fetch(`http://127.0.0.1:8000/weather_and_pollution_location?lat=${latitude}&lon=${longitude}`);
+                    const url = `http://127.0.0.1:8000/weather_and_pollution_location?lat=${lat}&lon=${lon}`;
+                    const response = await fetch(url);
                     const data = await response.json();
 
-                    const iconKey = data.weather[0]?.icon; // Using optional chaining
+                    const iconKey = data.weather[0]?.icon; 
                     const icon = allicons[iconKey] || clear_icon;
 
                     setWeatherData({
-                        humidity: data.main.humidity,
-                        windspeed: data.wind.speed,
-                        temperature: Math.floor(data.main.temp),
+                        humidity: data.humidity,
+                        windspeed: data.speed,
+                        temperature: Math.floor(data.temp),
                         location: data.name,
                         icon: icon
                     });
                 } catch (error) {
-                    console.error("Error fetching weather and pollution data:", error);
+                    
                 }
             });
         }
