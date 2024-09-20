@@ -9,13 +9,11 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 
 
-# Create the FastAPI app
 app = FastAPI(title=settings.PROJECT_NAME)
 
-# Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5174"],  # Allow your React app
+    allow_origins=["http://localhost:5174"],  
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -27,13 +25,13 @@ app.mount("/static", StaticFiles(directory="app/static"), name="static")
 async def serve_index():
     return FileResponse("app/static/index.html")
 
-# Mount static files
+
 app.mount("/static", StaticFiles(directory="app/static/react-app"), name="static")
 
-# Define the route for serving the index
+
 @app.get("/")
 async def serve_index():
     return FileResponse("app/static/react-app/index.html")
 
-# Include your API router
+
 app.include_router(api_router)
