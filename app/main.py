@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.api.api_v1.api import api_router  # Adjust the import based on your structure
 from fastapi.staticfiles import StaticFiles
 
-app = FastAPI(title="Your Project Name")
+app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,

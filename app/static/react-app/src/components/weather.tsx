@@ -8,12 +8,12 @@ import humid_icon from '../assets/humidity.png';
 import rain_icon from '../assets/rain.png';
 import snow_icon from '../assets/snow.png';
 import wind_icon from '../assets/wind.png';
-
-
+import pollution_icon from '../assets/pollution.png'; 
 
 const Weather = () => {
     const inputRef = useRef<HTMLInputElement>(null);
     const [weatherData, setWeatherData] = useState<any>(null);
+    const [pollutionData, setPollutionData] = useState<any>(null); 
 
     const allicons: { [key: string]: string } = {
         "01d": clear_icon,
@@ -52,8 +52,15 @@ const Weather = () => {
                 location: data.name,
                 icon: icon
             });
+
+            const pollution = data.airpollution.list[0].components; 
+            setPollutionData({
+                pm25: pollution.pm2_5,
+                pm10: pollution.pm10,
+                aqi: data.airpollution.list[0].main.aqi
+            });
         } catch (error) {
-            
+            console.error('Error fetching data', error);
         }
     };
 
@@ -66,19 +73,29 @@ const Weather = () => {
                     const url = `http://127.0.0.1:8000/weather_and_pollution_location?lat=${lat}&lon=${lon}`;
                     const response = await fetch(url);
                     const data = await response.json();
+                    const weatherData = data.weather;
 
                     const iconKey = data.weather[0]?.icon; 
                     const icon = allicons[iconKey] || clear_icon;
 
                     setWeatherData({
-                        humidity: data.humidity,
-                        windspeed: data.speed,
-                        temperature: Math.floor(data.temp),
-                        location: data.name,
+                        humidity: weatherData.main.humidity,
+                        windspeed: weatherData.wind.speed,
+                        temperature: Math.floor(weatherData.main.temp),
+                        location: weatherData.name,
                         icon: icon
                     });
-                } catch (error) {
+
                     
+                    const pollution = data.airpollution.list[0].components;
+                    setPollutionData({
+                        pm25: pollution.pm2_5,
+                        pm10: pollution.pm10,
+                        aqi: data.airpollution.list[0].main.aqi
+                    });
+
+                } catch (error) {
+                    console.error('Error fetching data', error);
                 }
             });
         }
@@ -88,7 +105,7 @@ const Weather = () => {
         <div className="weather">
             <div className="search-bar">
                 <input ref={inputRef} type="text" placeholder="Search city..." />
-                <img src={search_icon} alt="search" onClick={() => search(inputRef.current?.value || "Skopje")} />
+                <img src={search_icon} alt="search" onClick={() => search(inputRef.current?.value || "")} />
             </div>
             {weatherData && (
                 <>
@@ -110,6 +127,16 @@ const Weather = () => {
                                 <span>Wind Speed</span>
                             </div>
                         </div>
+                        {pollutionData && (
+                            <div className="col">
+                                <img src={pollution_icon} alt="pollution" />
+                                <div>
+                                    <p>PM2.5: {pollutionData.pm25}</p>
+                                    <p>PM10: {pollutionData.pm10}</p>
+                                    <span>Air Quality Index (AQI): {pollutionData.aqi}</span>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </>
             )}
