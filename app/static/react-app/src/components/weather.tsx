@@ -30,6 +30,8 @@ const Weather = () => {
         "10n": rain_icon,
         "13d": snow_icon,
         "13n": snow_icon,
+        "15d": pollution_icon,
+        "15n": pollution_icon
     };
 
     const search = async (city: string) => {
@@ -104,7 +106,7 @@ const Weather = () => {
     return (
         <div className="weather">
             <div className="search-bar">
-                <input ref={inputRef} type="text" placeholder="Search city..." />
+                <input ref={inputRef} type="text" placeholder="Search city" />
                 <img src={search_icon} alt="search" onClick={() => search(inputRef.current?.value || "")} />
             </div>
             {weatherData && (
