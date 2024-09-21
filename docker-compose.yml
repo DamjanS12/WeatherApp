@@ -1,0 +1,28 @@
+services:
+  backend:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    volumes:
+      - ./app:/app
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    networks:
+      - weather-network
+
+  frontend:
+    build:
+      context: ./app/static
+      dockerfile: Dockerfile
+    volumes:
+      - ./app/static:/app/static
+    ports:
+      - "3000:3000"
+    networks:
+      - weather-network
+
+networks:
+  weather-network:
+    driver: bridge
