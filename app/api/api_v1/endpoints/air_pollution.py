@@ -15,10 +15,9 @@ async def get_air_pollution(lat: float,lon: float) -> Any:
             params={"lat": lat, "lon": lon, "appid": settings.OPENWEATHERMAP_API_KEY}
             )
         
-    if data.status_code != 200:
-        raise HTTPException(status_code=data.status_code, detail=data.text)
+        if data.status_code != 200:
+            raise HTTPException(status_code=data.status_code, detail=data.text)
 
- 
     return data.json()
     
 

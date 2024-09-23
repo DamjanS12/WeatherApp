@@ -1,7 +1,7 @@
 import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.api.api_v1.api import api_router  # Adjust the import based on your structure
+from app.api.api_v1.api import api_router  
 from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()

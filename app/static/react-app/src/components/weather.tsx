@@ -60,7 +60,9 @@ const Weather = () => {
                 aqi: data.airpollution.list[0].main.aqi
             });
         } catch (error) {
-        
+        alert("Location not found");
+        console.error("Error:", error)
+
         }
     };
 
@@ -86,7 +88,7 @@ const Weather = () => {
                         icon: icon
                     });
 
-                   const pollution = data.airpollution.list[0].components;
+           const pollution = data.airpollution.list[0].components;
                     setPollutionData({
                         pm25: pollution.pm2_5,
                         pm10: pollution.pm10,

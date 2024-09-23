@@ -1,6 +1,6 @@
 import httpx
 from typing import Any, Optional
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from app.core.config import settings
 
 router = APIRouter()
