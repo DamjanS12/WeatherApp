@@ -30,8 +30,6 @@ const Weather = () => {
         "10n": rain_icon,
         "13d": snow_icon,
         "13n": snow_icon,
-        "15d": pollution_icon,
-        "15n": pollution_icon
     };
 
     const search = async (city: string) => {
@@ -62,7 +60,7 @@ const Weather = () => {
                 aqi: data.airpollution.list[0].main.aqi
             });
         } catch (error) {
-            console.error('Error fetching data', error);
+        
         }
     };
 
@@ -88,8 +86,7 @@ const Weather = () => {
                         icon: icon
                     });
 
-                    
-                    const pollution = data.airpollution.list[0].components;
+                   const pollution = data.airpollution.list[0].components;
                     setPollutionData({
                         pm25: pollution.pm2_5,
                         pm10: pollution.pm10,

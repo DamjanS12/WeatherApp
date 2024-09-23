@@ -1,7 +1,7 @@
 .weather{
     padding: 40px;
     border-radius: 10px;
-    background-image: linear-gradient(45deg, #2f4680, #ddd);
+    background-image: linear-gradient(45deg, #074cf8, #ddd);
     display: flex;
     flex-direction: column;
     align-items: center;
